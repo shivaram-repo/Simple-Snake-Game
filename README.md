@@ -1,6 +1,6 @@
 # 🐍 Simple Snake Game – JavaScript Project
 
-- A modern implementation of the classic Snake Game built using **VJavaScript**, designed to demonstrate practical understanding of core front-end development concepts and interactive game logic.
+- A modern implementation of the classic Snake Game built using **JavaScript**, designed to demonstrate practical understanding of core front-end development concepts and interactive game logic.
 
 - This project focuses on translating JavaScript fundamentals into a real-world application while ensuring smooth gameplay and responsiveness across devices.
 
