@@ -13,6 +13,7 @@ const timeelement = document.getElementById("time");
 const cols = Math.floor(board.clientWidth / blockwidth);
 const rows = Math.floor(board.clientHeight / blockheight);
 
+let speed = 200;
 let snake = [{ x: 1, y: 3 }];
 let direction = "right";
 let intervalid = null;
@@ -73,7 +74,12 @@ function drawSnake() {
     snake.unshift(head);
     score += 10;
     scoreelement.innerText = score;
-    if (score > highscore) {
+    if (speed > 80 && score >50) {
+  speed -= 5; // increase difficulty gradually
+  clearInterval(intervalid);
+  intervalid = setInterval(drawSnake, speed);
+}
+  if (score > highscore) {
       highscore = score;
       localStorage.setItem("highscore", highscore.toString());
       highscoreelement.innerText = highscore;
@@ -93,7 +99,7 @@ btnstart.addEventListener("click", () => {
   modal.style.display = "none";
   intervalid = setInterval(() => {
     drawSnake();
-  }, 300);
+  }, speed);
   timerid = setInterval(() => {
     let [mins , secs]=time.split(":").map(Number);
     secs+=1;
@@ -137,13 +143,13 @@ function restartGame() {
   }, 300);
 }
 addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") {
+  if (event.key === "ArrowLeft" && direction !== "right") {
     direction = "left";
-  } else if (event.key === "ArrowRight") {
+  } else if (event.key === "ArrowRight" && direction !== "left") {
     direction = "right";
-  } else if (event.key === "ArrowUp") {
+  } else if (event.key === "ArrowUp" && direction !== "down") {
     direction = "up";
-  } else if (event.key === "ArrowDown") {
+  } else if (event.key === "ArrowDown" && direction !== "up") {
     direction = "down";
   }
 });
@@ -159,7 +165,7 @@ board.addEventListener("touchend",(event)=>{
   touchendx=touch.clientX;
   touchendy=touch.clientY;
   const dx=touchendx-touchstartx;
-  const dy=touchendy-touchstartx;
+  const dy=touchendy-touchstarty;
   if(Math.abs(dx)<10 && Math.abs(dy)<10) return;
   if (Math.abs(dx) > Math.abs(dy)) {
     // Horizontal swipe
@@ -182,3 +188,4 @@ board.addEventListener("touchmove",(event)=>{
     event.preventDefault();},
   { passive: false }
 );
+
