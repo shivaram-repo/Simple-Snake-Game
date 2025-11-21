@@ -89,15 +89,69 @@ section .infos {
 }
 
 .block {
+  position: relative;
   border-radius: 50%;
 }
 
 .fill {
-  background-color: var(--bg-fill-color);
+  background: linear-gradient(135deg, #7cffcb, #2dc653);
+  border-radius: 60%;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
 }
 
-.food{
-  background-color: var(--bg-food-color);
+.food {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #c1121f);
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ff4d4d, 0 0 12px #ff1a1a;
+  animation: pulse 2s infinite alternate;
+  transform: scale(0.6);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    box-shadow: 0 0 6px #ff4d4d;
+  }
+  50% {
+    transform: scale(0.7);
+    box-shadow: 0 0 14px #ff1a1a, 0 0 28px #ff0000;
+  }
+  100% {
+    transform: scale(0.5);
+    box-shadow: 0 0 6px #ff4d4d;
+  }
+}
+
+.head {
+  background: linear-gradient(135deg, #00ffd5, #2dc653);
+  border-radius: 50%;
+  transform: scale(0.90);  
+  box-shadow: 0 0 10px #2dc653;
+}
+
+/* Eyes */
+.head::before,
+.head::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  top: 12px;
+}
+
+.head::before {
+  left: 10px;
+}
+
+.head::after {
+  right: 10px;
+}
+
+.head::before,
+.head::after {
+  box-shadow: inset 2px 2px 0 #000;
 }
 
 .modal{

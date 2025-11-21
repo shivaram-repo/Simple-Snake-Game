@@ -87,12 +87,17 @@ function drawSnake() {
   }
 
   snake.forEach((segment) => {
-    blocks[`${segment.x},${segment.y}`].classList.remove("fill");
+   const block = blocks[`${segment.x},${segment.y}`];
+   block.classList.remove("fill", "head");
   });
   snake.unshift(head);
   snake.pop();
-  snake.forEach((segment) => {
-    blocks[`${segment.x},${segment.y}`].classList.add("fill");
+  snake.forEach((segment,index) => {
+  const block =  blocks[`${segment.x},${segment.y}`];
+  block.classList.add("fill");
+   if(index===0){
+    block.classList.add("head");
+   }
   });
 }
 btnstart.addEventListener("click", () => {
