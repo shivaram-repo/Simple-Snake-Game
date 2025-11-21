@@ -64,7 +64,7 @@ This project helped me gain practical experience in:
 
 ---
 
-## 🚀 Play the game here:
+## 🚀 Play the game here
 
 🔗 https://shivaram-repo.github.io/Simple-Snake-Game/
 
