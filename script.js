@@ -90,7 +90,8 @@ function drawSnake() {
 
   snake.forEach((segment) => {
    const block = blocks[`${segment.x},${segment.y}`];
-   block.classList.remove("fill", "head");
+   block.classList.remove("fill");
+   block.classList.remove("head");
   });
   snake.unshift(head);
   snake.pop();
