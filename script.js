@@ -56,8 +56,10 @@ function drawSnake() {
 
   //wall collision
   if (head.x < 0 || head.y < 0 || head.x >= rows || head.y >= cols) {
+    blocks[`${snake[0].x},${snake[0].y}`].classList.remove("head");
     alert("Game Over");
     clearInterval(intervalid);
+    clearInterval(timerid);
     modal.style.display = "flex";
     strgame.style.display = "none";
     gameover.style.display = "flex";
@@ -123,18 +125,22 @@ btnrestart.addEventListener("click", () => {
 function restartGame() {
   score = 0;
   time = "00:00";
+  speed = 200;
   scoreelement.innerText = score;
   timeelement.innerText = time;
   highscoreelement.innerText = highscore;
   blocks[`${food.x},${food.y}`].classList.remove("food");
   snake.forEach((segment) => {
-    blocks[`${segment.x},${segment.y}`].classList.remove("fill");
+    const block = blocks[`${segment.x},${segment.y}`];
+    if(block) { // Safety check
+      block.classList.remove("fill", "head");
+    }
   });
 
   modal.style.display = "none";
   snake = [
     {
-      x: 1,
+      x: 2,
       y: 3,
     },
   ];
@@ -145,7 +151,17 @@ function restartGame() {
   direction = "right";
   intervalid = setInterval(() => {
     drawSnake();
-  }, 300);
+  }, speed);
+  timerid = setInterval(() => {
+    let [mins , secs]=time.split(":").map(Number);
+    secs+=1;
+    if(secs===60){
+      mins+=1;
+      secs=0;
+    }
+    time=`${mins.toString().padStart(2,"0")}:${secs.toString().padStart(2,"0")}`;
+    timeelement.innerText = time;
+  },1000);
 }
 addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && direction !== "right") {
